@@ -1,6 +1,13 @@
+
+
+// stdlib library for malloc
+// string library for strcmp and strdup
+
 #include <stdlib.h>
 #include <string.h>
 # define HASHSIZE 333
+
+// Node of linked list.
 
 typedef struct			s_hashlst
 {
@@ -9,16 +16,23 @@ typedef struct			s_hashlst
 	struct s_hashlst	*next;
 }						t_hashlst;
 
+// This is an array of linked lists. The array is defined on top with size 333 in this example.
+
 typedef struct			s_hasharr
 {
 	t_hashlst			*hashtab[HASHSIZE];
 }						t_hasharr;
+
+// Prototyping functions, usually in a header file
 
 unsigned int			hashix(char *key);
 t_hashlst				*hash_lookup(char *key, t_hasharr *arr);
 int						hash_install(char *key, void *data, t_hasharr *arr);
 t_hasharr				*hash_newtab(void);
 t_hasharr				*hash_wipe(t_hasharr *hashtab);
+
+// Hashes a string returning an unsigned integer. The hashing formula is a simple one.
+
 unsigned int			hashix(char *key)
 {
 	unsigned int		hashval;
@@ -33,6 +47,8 @@ unsigned int			hashix(char *key)
 	}
 	return (hashval % HASHSIZE);
 }
+
+// Sees if key exists in hashtable
 
 t_hashlst				*hash_lookup(char *key, t_hasharr *arr)
 {
@@ -49,6 +65,8 @@ t_hashlst				*hash_lookup(char *key, t_hasharr *arr)
 	}
 	return (NULL);
 }
+
+// Add a new key to the hashtable
 
 int						hash_install(char *key, void *data, t_hasharr *arr)
 {
@@ -75,6 +93,8 @@ int						hash_install(char *key, void *data, t_hasharr *arr)
 	return (1);
 }
 
+// Initialize a new hashtable
+
 t_hasharr				*hash_newtab(void)
 {
 	int					i;
@@ -87,6 +107,8 @@ t_hasharr				*hash_newtab(void)
 		new->hashtab[i] = NULL;
 	return (new);
 }
+
+// Remove all values in the hashtable
 
 t_hasharr				*hash_wipe(t_hasharr *htab)
 {
