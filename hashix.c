@@ -58,7 +58,7 @@ int						hash_install(char *key, void *data, t_hasharr *arr)
 	if ((np = hash_lookup(key, arr)) == NULL)
 	{
 		np = (t_hashlst *)malloc(sizeof(*np));
-		if (np == NULL || (np->key = ft_strdup(key)) == NULL)
+		if (np == NULL || (np->key = strdup(key)) == NULL)
 			return (0);
 		hashval = hashix(key);
 		np->next = arr->hashtab[hashval];
